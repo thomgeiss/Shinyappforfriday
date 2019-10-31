@@ -1,2 +1,2 @@
 # Shinyappforfriday
-this is the shiny app meant for hawk due on Friday
+this is the shiny app meant for hmwk due on Friday
