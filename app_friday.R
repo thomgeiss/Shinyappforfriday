@@ -40,8 +40,7 @@ ui <- fluidPage(
                       label = "y-axis",
                       choices = axis_vars,
                       selected = "y"),
-          actionButton("go",
-                       "Go!",
+          submitButton(text = "Go!",
                        icon = icon("thumbs-up"))),
           
           #This will show a plot of the diamonds dataframe
@@ -52,14 +51,14 @@ ui <- fluidPage(
 
 #server functions that will make the histogram 
 server <- function(input, output) {
-  filt_dia <- eventReactive(input$go, 
+  filt_dia <- reactive(
                        {diamonds %>% #this uses reactive functions which will change according to their input
                         filter(carat >= min(input$caratrange)) %>%
                         filter(carat <= max(input$caratrange))
     stop("I added this stop")
     })
 #using ggplot to make the plot with a reactive function that will change according to the input$go
- p_diamonds <- eventReactive(input$go, {
+ p_diamonds <- reactive({
                              ggplot(filt_dia(), aes_string(x = input$xvar, y = input$yvar)) +
                             geompoint()
    })
